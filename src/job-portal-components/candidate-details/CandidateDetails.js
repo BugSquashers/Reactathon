@@ -2,6 +2,39 @@ import React, { Component } from 'react';
 import './CandidateDetails.css';
 
 class CandidateDetails extends Component {
+	applyForJob = (jobId) => {
+    console.log('value of id id -->', jobId);
+	
+ 
+
+let candidate_details={fullName:"Kanchan Kumar",
+	age:"30",
+	candidateId:"7890232",
+	qualification:"B.Tech",
+	skills:"Java,J2EE",
+	experience:"8",
+	jobId:"102368",
+	address:"hyderabad",
+	email:"manisha.pradhan@vz.com",
+	contactDetails:" ",
+	mobileNo:"9848283423",
+	_id : ""
+
+}
+
+	fetch('/saveCandidateDetails', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(candidate_details)
+})
+.then(function(resp){
+    // your response
+})
+
+}
   render() {
     return (
 	<div className="candidateClass">Please Enter your Details
@@ -44,7 +77,7 @@ class CandidateDetails extends Component {
                                 </p>
                                 
                                 <p className="signin button"> 
-									<input type="submit" value="Sign up"/> 
+									<input type="button" value="Sign up" onClick={(e)=>this.applyForJob()}/> 
 								</p>
                                 
                             </form>

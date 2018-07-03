@@ -24,6 +24,10 @@ class OpenJobs extends Component {
     return body;
   };
 	
+	applyForJob = (jobId) => {
+    console.log('value of id id -->', jobId);
+	
+  }
 	
 	render() {
     const response = this.state.response.map((item, i) => (
@@ -33,7 +37,7 @@ class OpenJobs extends Component {
 		<td>{ item.position }</td>
 		<td>{ item.location }</td>
 		<td>{ item.noOfOpenings }</td>
-		<td><input type="submit" value="Apply"/></td>
+		<td><input type="button" value="Apply" onClick={(e)=>this.applyForJob(item.jobId, e)}/></td>
       </tr>
     ));
 
@@ -53,6 +57,7 @@ class OpenJobs extends Component {
 		<tbody>{ response }</tbody>
 	  </table>
     );
+	
   }
 	
   
