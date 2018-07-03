@@ -18,7 +18,6 @@ class OpenJobs extends Component {
     const response = await fetch('/listJobDetails');
 	
     const body = await response.json();
-	console.log(body);
 	
     if (response.status !== 200) throw Error(body.message);
 

@@ -10,7 +10,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} />
-         <h1 className="App-title">Squashers Job Portal</h1>
+         <h1 className="App-title">Verizon Job Portal</h1>
         </header>
        
          <SideMenu></SideMenu>
