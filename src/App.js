@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.jpg';
 import './App.css';
-import OpenJobs from './job-portal-components/open-jobs/OpenJobs';
-import CandidateDetails from './job-portal-components/candidate-details/CandidateDetails';
-import HRFeedback from './job-portal-components/hr-feedback/HRFeedback';
-import CandidateFeedback from './job-portal-components/candidate-feedback/CandidateFeedback';
+
 import SideMenu from './job-portal-components/side-menu/SideMenu';
 
 class App extends Component {
