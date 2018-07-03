@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import OpenJobs from './job-portal-components/OpenJobs';
+import OpenJobs from './job-portal-components/open-jobs/OpenJobs';
+import CandidateDetails from './job-portal-components/candidate-details/CandidateDetails';
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
 		<OpenJobs/>
+		<CandidateDetails/>
       </div>
     );
   }
