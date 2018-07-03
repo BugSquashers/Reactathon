@@ -4,6 +4,7 @@ import './SideMenu.css';
 import OpenJobs from '../open-jobs/OpenJobs';
 import CandidateDetails from '../candidate-details/CandidateDetails';
 import HRFeedback from '../hr-feedback/HRFeedback';
+import SearchJobs from '../search-jobs/SearchJobs';
 import CandidateFeedback from '../candidate-feedback/CandidateFeedback';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 class SideMenu extends Component {
@@ -12,6 +13,7 @@ class SideMenu extends Component {
 	  <Router>
             <div>
                <ul>
+			   <li><Link to={'/SearchJobs'}>Search Jobs</Link></li>
                   <li><Link to={'/OpenJobs'}>Open Jobs</Link></li>
                   <li><Link to={'/CandidateDetails'}>Candidate Details</Link></li>
 				  <li><Link to={'/HRFeedback'}>HR Feedback</Link></li>
@@ -24,6 +26,7 @@ class SideMenu extends Component {
                   <Route exact path='/CandidateDetails' component={CandidateDetails} />
 				  <Route exact path='/HRFeedback' component={HRFeedback} />
 				  <Route exact path='/CandidateFeedback' component={CandidateFeedback} />
+				  <Route exact path='/SearchJobs' component={SearchJobs} />
                </Switch>
             </div>
          </Router>
@@ -33,3 +36,4 @@ class SideMenu extends Component {
 }
 
 export default SideMenu;
+

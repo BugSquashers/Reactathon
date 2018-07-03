@@ -3,7 +3,11 @@ import './SearchJobs.css';
 
 class SearchJobs extends Component {
   render() {
-    return (<div className="searchJobs">Search Jobs</div>);
+    return (<form  action=""> 
+
+                                
+                                
+                            </form>);
   }
 }
 
