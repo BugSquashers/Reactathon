@@ -22,6 +22,15 @@ var app = express();
 
 },{collection: 'Candidate_Details'},{versionKey:false});
 
+var jobDetailsSchema = new mongoose.Schema({
+	jobId:String,
+	coreSkils:String,
+	position:String,
+	location:String,
+	noOfOpenings:String
+
+},{collection: 'jobDetails'},{versionKey:false});
+
 var Candidate = mongoose.model("Candidate",candidateSchema) ;
 
 app.use(bodyParser.json());
@@ -107,6 +116,23 @@ console.log("Switched to "+dbo.databaseName+" database");
 });
 
       
+});
+
+var SearchJobsDetails = mongoose.model("searchJobs",jobDetailsSchema) ;
+
+app.post('/searchJobsDetails', function (req, res) {
+var searchCriteria = new SearchJobsDetails(req.body); 
+ console.log("-------AAA" + req.body.coreSkils);
+SearchJobsDetails.find({coreSkils:'Java'},function(err,doc){
+ if (err){ 
+         console.error(err);
+res.send(err);
+      } else {
+        console.log("Search Success");
+		res.send(doc);
+      }
+});
+
 });
 app.listen(8081);
 console.log('Running');
