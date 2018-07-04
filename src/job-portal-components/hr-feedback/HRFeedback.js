@@ -128,7 +128,7 @@ submitFeedback = () => {
     ));
 	
     return (
-	<form className="content-body" action="" autocomplete="on"> 
+	<form className="content-body" action=""> 
 		<h3> Feedback </h3>
 		<p> 
 			<label htmlFor="jobid" className="jobid">Select Job*</label>

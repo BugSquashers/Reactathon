@@ -53,7 +53,7 @@ getInterviewFeedback = async () => {
 	  this.state.autoId = item._id
     ));
 	
-    return (<form class="content-body" action=""> 
+    return (<form className="content-body" action=""> 
 
                                 <h3> Candidate Feedback </h3> 
                                 
