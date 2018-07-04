@@ -76,7 +76,7 @@ if(req.body.candidateId == null || req.body.candidateId === ""){
 Candidate.findOneAndUpdate({$or:[{email:req.body.email},{candidateId:req.body.candidateId}]},cadidate ,{upsert:true,new:true},function(err,doc){
  if (err){ 
          console.error(err);
-	res.send("Profile already,Enter different email id and try again");
+	res.send("Profile already exists,Enter different email id and try again");
       } else {
         console.log("Inserted/Updated  to Candidate_Details");
 	res.send("Successfully added candidate Details candidate Id:"+cadidate.candidateId);

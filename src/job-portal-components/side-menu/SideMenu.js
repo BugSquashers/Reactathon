@@ -7,6 +7,7 @@ import HRFeedback from '../hr-feedback/HRFeedback';
 import SearchJobs from '../search-jobs/SearchJobs';
 import CandidateFeedback from '../candidate-feedback/CandidateFeedback';
 import ScheduleInterview from '../schedule-interview/ScheduleInterview';
+import InterviewerFeedback from '../interviewer-feedback/InterviewerFeedback';
 
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 class SideMenu extends Component {
@@ -15,14 +16,16 @@ class SideMenu extends Component {
 	<div>
 	  <Router>   
 		<div>	
-			<div class= "menu-left">
-               <ul class="nav nav-tabs" >
+			<div className= "menu-left">
+               <ul className="nav nav-tabs" >
 			      <li><Link to={'/SearchJobs'}>Search Jobs</Link></li>
                   <li><Link to={'/OpenJobs'}>Open Jobs</Link></li>
                   <li><Link to={'/CandidateDetails'}>Candidate Details</Link></li>
 				  <li><Link to={'/HRFeedback'}>Feedback</Link></li>
 				  <li><Link to={'/CandidateFeedback'}>Candidate Feedback</Link></li>
 				  <li><Link to={'/ScheduleInterview'}>Schedule A Interview</Link></li>
+				  <li><Link to={'/InterviewerFeedback'}>Interviewer Feedback</Link></li>
+				  
                </ul>
                     </div> 
 <div>					
@@ -33,6 +36,7 @@ class SideMenu extends Component {
 				  <Route exact path='/CandidateFeedback' component={CandidateFeedback} />
 				  <Route exact path='/ScheduleInterview' component={ScheduleInterview} />
 				  <Route exact path='/SearchJobs' component={SearchJobs} />
+				  <Route exact path='/InterviewerFeedback' component={InterviewerFeedback} />
               </Switch>
 			   </div>    
           </div>

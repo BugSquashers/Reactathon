@@ -56,11 +56,11 @@ class OpenJobs extends Component {
     ));
 
     return (
-	<div class="content-body" >
-	 <h3 class ="">Openings:</h3>
-      <table class="table" >
+	<div className="content-body" >
+	 <h3 className="">Openings:</h3>
+      <table className="table" >
 	 
-		<thead class="thead-dark">
+		<thead className="thead-dark">
 			<tr>
 				
 				<th>Job Id</th>

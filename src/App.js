@@ -7,7 +7,7 @@ import SideMenu from './job-portal-components/side-menu/SideMenu';
 class App extends Component {
   render() {
     return (
-      <div className="App" class="container">
+      <div className="App" className="container">
         <header className="App-header">
           <img src={logo} />
          
