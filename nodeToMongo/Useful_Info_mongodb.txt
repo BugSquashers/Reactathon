@@ -6,7 +6,7 @@ GO to path where mongo installed --> C:\Program Files\MongoDB\Server\4.0\bin
 mongo
 
 3. Command to use the DB-->
-use jobDB
+use jobsDB
 
 4. Command to show tables -->
 show tables
