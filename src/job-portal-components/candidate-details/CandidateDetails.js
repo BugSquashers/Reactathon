@@ -25,12 +25,12 @@ class CandidateDetails extends Component {
   };
 	
 	applyForJob = (jobId) => {
-    console.log('value of id id -->', jobId);
+    
 
 			let candidate_details={
+				jobId:this.state._jobId,
 				fullName:this.state._fullName,
 				age:this.state._age,
-				
 				qualification:this.state._qualification,
 				skills:this.state._skills,
 				experience:this.state._experience,
@@ -55,6 +55,9 @@ class CandidateDetails extends Component {
 			})
 
 	}
+	 handleJobIdSetChange = (e) =>{
+		   this.setState({_jobId: e.target.value});
+		}
 	 handleFullNameSetChange = (e) =>{
 		   this.setState({_fullName: e.target.value});
 		}
@@ -87,7 +90,10 @@ class CandidateDetails extends Component {
 	<div className="content-body candidateClass" id="register">
 	<h3>Please Enter your Details:</h3>
                             <form > 
-	
+								 <p> 
+                                    <label htmlFor="jobIdsignup" className="jobid" data-icon="u">Enter Job Id</label>
+                                    <input id="jobIdsignup" className="form-control" value={this.state._jobId} name="jobIdsignup" onChange={this.handleJobIdSetChange} required="required" type="number" />
+                                </p>
                                 <p> 
                                     <label htmlFor="_fullName" className="uname" data-icon="u">Enter Full Name</label>
                                     <input id="_fullName" className="form-control" value={this.state._fullName} name="_fullName" onChange={this.handleFullNameSetChange} required="required" type="text" />

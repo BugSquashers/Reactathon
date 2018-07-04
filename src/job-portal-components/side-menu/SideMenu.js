@@ -20,7 +20,6 @@ class SideMenu extends Component {
                <ul className="nav nav-tabs" >
 			      <li><Link to={'/SearchJobs'}>Search Jobs</Link></li>
                   <li><Link to={'/OpenJobs'}>Open Jobs</Link></li>
-                  <li><Link to={'/CandidateDetails'}>Candidate Details</Link></li>
 				  <li><Link to={'/HRFeedback'}>Feedback</Link></li>
 				  <li><Link to={'/CandidateFeedback'}>Candidate Feedback</Link></li>
 				  <li><Link to={'/ScheduleInterview'}>Schedule A Interview</Link></li>
