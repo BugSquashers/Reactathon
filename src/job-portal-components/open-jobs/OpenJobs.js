@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import './OpenJobs.css';
+import CandidateDetails from '../candidate-details/CandidateDetails';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 class OpenJobs extends Component {
 	
 
   state = {
-    response: []
+    response: [],
+	jobId: ''
   };
 
   componentDidMount() {
@@ -25,6 +28,17 @@ class OpenJobs extends Component {
   };
 	
 	applyForJob = (jobId) => {
+		 this.setState({jobId: jobId});
+		 <Router>   
+		<div>						
+               <Switch>
+                  
+                  <Route exact path='/CandidateDetails' component={CandidateDetails} />
+				
+              </Switch>
+			      
+          </div>
+         </Router>
     console.log('value of id id -->', jobId);
 	
   }
@@ -37,7 +51,7 @@ class OpenJobs extends Component {
 		<td>{ item.position }</td>
 		<td>{ item.location }</td>
 		<td>{ item.noOfOpenings }</td>
-		<td><input type="button" value="Apply" onClick={(e)=>this.applyForJob(item.jobId, e)}/></td>
+		<td><input type="button" value="Apply"  to={'/CandidateDetails'} onClick={(e)=>this.applyForJob(item.jobId, e)}/></td>
       </tr>
     ));
 
@@ -59,6 +73,7 @@ class OpenJobs extends Component {
 		</thead>
 		<tbody>{ response }</tbody>
 	  </table>
+	 
 	  </div>
     );
 	
