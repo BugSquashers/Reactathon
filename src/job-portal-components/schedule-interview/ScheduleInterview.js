@@ -3,12 +3,12 @@ import './ScheduleInterview.css';
 
 class ScheduleInterview extends Component {
   render() {
-    return (<form class="content-body" action="" autocomplete="on"> 
+    return (<form className="content-body" action="" autocomplete="on"> 
 
-                                <h1> Schedule A Interview </h1> 
+                                <h3> Schedule A Interview </h3> 
 								<p> 
 								<label htmlFor="jobid" className="jobid">Select Job*</label>
-								<select>
+								<select className="form-control">
   <option value="volvo">Volvo</option>
   <option value="saab">Saab</option>
   <option value="opel">Opel</option>
@@ -18,7 +18,7 @@ class ScheduleInterview extends Component {
 
 <p> 
 								<label htmlFor="selectcandidate" className="selectcandidate">Select Candidate*</label>
-								<select>
+								<select className="form-control">
   <option value="volvo">Volvo</option>
   <option value="saab">Saab</option>
   <option value="opel">Opel</option>
@@ -29,17 +29,17 @@ class ScheduleInterview extends Component {
 
                                 <p> 
                                     <label htmlFor="interviewdate" className="interviewdate">Interview Date*</label>
-                                    <input id="interviewdate" name="interviewdate" required="required" type="text" placeholder="Interview Date" />
+                                    <input id="interviewdate" className="form-control" name="interviewdate" required="required" type="text" placeholder="Interview Date" />
                                 </p>
 								
 								<p> 
                                     <label htmlFor="interviewtime" className="interviewtime">Interview Time*</label>
-                                    <input id="interviewtime" name="interviewtime" required="required" type="text" placeholder="Interview Time" />
+                                    <input id="interviewtime" className="form-control" name="interviewtime" required="required" type="text" placeholder="Interview Time" />
                                 </p>
 								
 								<p> 
                                     <label htmlFor="interviewername" className="interviewername">Interviewer Name*</label>
-                                    <input id="interviewername" name="interviewername" required="required" type="text" placeholder="Interviewer Name" />
+                                    <input id="interviewername" className="form-control" name="interviewername" required="required" type="text" placeholder="Interviewer Name" />
                                 </p>
                                 
 
@@ -48,8 +48,8 @@ class ScheduleInterview extends Component {
 
 
 
-                                <p> 
-									<input type="submit" value="Schedule Interview"/> 
+                                <p align ="right">  
+									<input type="submit" className="btn btn-success" value="Schedule Interview"/> 
 								</p>
                                 
                             </form>);

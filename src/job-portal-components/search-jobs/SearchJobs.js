@@ -69,17 +69,17 @@ applyForJob = (jobId) => {
 	
     return (
 	
-	<div class= "content-body" id="search">
+	<div className= "content-body" id="search">
                             <form > 
 
-                                <h1> Search </h1> 
+                                <h3> Search </h3> 
                                 <p> 
                                     <label htmlFor="skillSet" className="uname" data-icon="u">Please Enter skill set to search:</label>
-                                    <input id="skillSet" name="skillSet" required="required" class="form-control" type="text" placeholder="e.g. Java, React, Angular" value={this.state.skillSet} onChange={this.handleSkillSetChange}/>
+                                    <input id="skillSet" name="skillSet" required="required" className="form-control" type="text" placeholder="e.g. Java, React, Angular" value={this.state.skillSet} onChange={this.handleSkillSetChange}/>
                                 </p>
                                                                 
                                 <p className="search" align="right"> 
-									<input type="button" class="btn btn-info" value="Search Jobs" onClick={(e)=>this.searchJobs()}/> 
+									<input type="button" className="btn btn-success" value="Search Jobs" onClick={(e)=>this.searchJobs()}/> 
 								</p>
                                 
                             </form>
@@ -88,8 +88,8 @@ applyForJob = (jobId) => {
 							
 	
 	
-   <table class ="table">
-		<thead class="thead-dark">
+   <table className ="table">
+		<thead className="thead-dark">
 			<tr>
 				
 				<th>Job Id</th>
