@@ -5,42 +5,66 @@ class HRFeedback extends Component {
   render() {
     return (<form class="content-body" action="" autocomplete="on"> 
 
-                                <h1> Register </h1> 
-                                <p> 
-                                    <label for="usernamesignup" className="uname" data-icon="u">Your username</label>
-                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="" />
+                                <h1> Feedback </h1> 
+                               
+							   
+							   <p> 
+								<label htmlFor="jobid" className="jobid">Select Job*</label>
+								<select>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+</p>
+
+
+
+							   <p> 
+								<label htmlFor="selectcandidate" className="selectcandidate">Select Candidate*</label>
+								<select>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+</p> 
+
+<p> 
+								<label htmlFor="candidatestatus" className="candidatestatus">Select Status*</label>
+								<select>
+  <option value="volvo">Rejected</option>
+  <option value="saab">Selected</option>
+  
+</select>
+</p> 
+
+
+<p> 
+                                    <label htmlFor="interviewerfeedback" className="interviewerfeedback">Interviewer Feedback*</label>
+									
+									<textarea id="interviewerfeedback" name="interviewerfeedback" required="required" rows="4" cols="50" disabled="true">
+</textarea>
+
+
+                                   
                                 </p>
-                                <p> 
-                                    <label for="emailsignup" className="youmail" data-icon="e" > Your email</label>
-                                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="abc@gmail.com"/> 
+								
+								
+<p> 
+                                    <label htmlFor="hrfeedback" className="hrfeedback">Feedback*</label>
+									
+									<textarea id="hrfeedback" name="hrfeedback" required="required" placeholder="Please enter feedback."  rows="4" cols="50">
+</textarea>
+
+
+                                   
                                 </p>
-								<p> 
-                                    <label for="contactnumbersignup" className="contactnumbersignup">Your Contact Number </label>
-                                    <input id="contactnumbersignup" name="contactnumbersignup" required="required" placeholder="9876543210"/>
-                                </p>
-                                <p> 
-                                    <label for="fullnamesignup" className="fullnamesignup" data-icon="p">Your Name </label>
-                                    <input id="fullnamesignup" name="fullnamesignup" required="required" placeholder=""/>
-                                </p>
-								<p> 
-                                    <label for="agesignup" className="agesignup">Your Age </label>
-                                    <input id="agesignup" name="agesignup" required="required" placeholder="25"/>
-                                </p>
-								<p> 
-                                    <label for="highestqualsignup" className="highestqualsignup">Your Highest Qualification </label>
-                                    <input id="highestqualsignup" name="highestqualsignup" required="required" placeholder="B. Tech"/>
-                                </p>
-								<p> 
-                                    <label for="skillssignup" className="skillssignup">Your Skills </label>
-                                    <input id="skillssignup" name="skillssignup" required="required" placeholder="Java, J2EE"/>
-                                </p>
-								<p> 
-                                    <label for="experiencesignup" className="experiencesignup">Your Experience </label>
-                                    <input id="experiencesignup" name="experiencesignup" required="required" placeholder="3"/>
-                                </p>
+
+
                                 
                                 <p className="signin button"> 
-									<input type="submit" value="Sign up"/> 
+									<input type="submit" value="Submit Feedback"/> 
 								</p>
                                 
                             </form>);
