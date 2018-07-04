@@ -68,14 +68,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.post('/saveCandidateDetails', function (req, res) {
-var cadidate = new Candidate(req.body);  
-Candidate.findOneAndUpdate({email:req.body.email},cadidate ,{upsert:true,new:true},function(err,doc){
+var cadidate = new Candidate(req.body); 
+if(req.body.candidateId == null || req.body.candidateId === ""){
+	cadidate.candidateId=req.body.fullName.substring(0, 4)+"_"+req.body.mobileNo.substring(0, 2);
+} 
+Candidate.findOneAndUpdate({$or:[{email:req.body.email},{candidateId:req.body.candidateId}]},cadidate ,{upsert:true,new:true},function(err,doc){
  if (err){ 
          console.error(err);
-res.send(err);
+	res.send("Profile already,Enter different email id and try again");
       } else {
         console.log("Inserted/Updated  to Candidate_Details");
-res.send("Success");
+	res.send("Successfully added candidate Details candidate Id:"+cadidate.candidateId);
       }
 });
 
@@ -188,6 +191,18 @@ res.send("Success");
       }
 });
 
+});
+
+app.post('/getInterviewFeedback', function (req, res) {
+MongoClient.connect(url, function(err, db) {
+var dbo=db.db("jobsDB"); 
+var query = {candidateId:req.body.candidateId};
+dbo.collection("Interview_Feedback").find(query).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+res.end( JSON.stringify(result));
+    db.close();
+  });});
 });
 
 
