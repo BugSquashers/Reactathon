@@ -3,14 +3,14 @@ import './HRFeedback.css';
 
 class HRFeedback extends Component {
   render() {
-    return (<form class="content-body" action="" autocomplete="on"> 
+    return (<form className="content-body" action="" autocomplete="on"> 
 
-                                <h1> Feedback </h1> 
+                                <h3> Feedback </h3> 
                                
 							   
 							   <p> 
 								<label htmlFor="jobid" className="jobid">Select Job*</label>
-								<select>
+								<select className="form-control">
   <option value="volvo">Volvo</option>
   <option value="saab">Saab</option>
   <option value="opel">Opel</option>
@@ -22,7 +22,7 @@ class HRFeedback extends Component {
 
 							   <p> 
 								<label htmlFor="selectcandidate" className="selectcandidate">Select Candidate*</label>
-								<select>
+								<select className="form-control">
   <option value="volvo">Volvo</option>
   <option value="saab">Saab</option>
   <option value="opel">Opel</option>
@@ -32,7 +32,7 @@ class HRFeedback extends Component {
 
 <p> 
 								<label htmlFor="candidatestatus" className="candidatestatus">Select Status*</label>
-								<select>
+								<select className="form-control">
   <option value="volvo">Rejected</option>
   <option value="saab">Selected</option>
   
@@ -43,7 +43,7 @@ class HRFeedback extends Component {
 <p> 
                                     <label htmlFor="interviewerfeedback" className="interviewerfeedback">Interviewer Feedback*</label>
 									
-									<textarea id="interviewerfeedback" name="interviewerfeedback" required="required" rows="4" cols="50" disabled="true">
+									<textarea id="interviewerfeedback" className="form-control" name="interviewerfeedback" required="required" rows="4" cols="50" disabled="true">
 </textarea>
 
 
@@ -54,7 +54,7 @@ class HRFeedback extends Component {
 <p> 
                                     <label htmlFor="hrfeedback" className="hrfeedback">Feedback*</label>
 									
-									<textarea id="hrfeedback" name="hrfeedback" required="required" placeholder="Please enter feedback."  rows="4" cols="50">
+									<textarea id="hrfeedback" className="form-control" name="hrfeedback" required="required" placeholder="Please enter feedback."  rows="4" cols="50">
 </textarea>
 
 
@@ -63,8 +63,8 @@ class HRFeedback extends Component {
 
 
                                 
-                                <p className="signin button"> 
-									<input type="submit" value="Submit Feedback"/> 
+                                <p className="signin button" align="right"> 
+									<input type="submit" className="btn btn-success" value="Submit Feedback"/> 
 								</p>
                                 
                             </form>);
