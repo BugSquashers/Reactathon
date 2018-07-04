@@ -118,21 +118,16 @@ console.log("Switched to "+dbo.databaseName+" database");
       
 });
 
-var SearchJobsDetails = mongoose.model("searchJobs",jobDetailsSchema) ;
-
 app.post('/searchJobsDetails', function (req, res) {
-var searchCriteria = new SearchJobsDetails(req.body); 
- console.log("-------AAA" + req.body.coreSkils);
-SearchJobsDetails.find({coreSkils:'Java'},function(err,doc){
- if (err){ 
-         console.error(err);
-res.send(err);
-      } else {
-        console.log("Search Success");
-		res.send(doc);
-      }
-});
-
+MongoClient.connect(url, function(err, db) {
+var dbo=db.db("jobsDB"); 
+var query = {coreSkils:{$regex:'.*'+req.body.coreSkils+'.*',$options:'i'}};
+dbo.collection("jobDetails").find(query).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+res.end( JSON.stringify(result));
+    db.close();
+  });});
 });
 app.listen(8081);
 console.log('Running');
