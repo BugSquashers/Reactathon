@@ -6,6 +6,7 @@ class HRFeedback extends Component {
 	state = {
 		response: [],
 		jobAndCandidateResponse:[],
+		interviewFeedbackResponse:[],
 		jobid: '',
 		selectcandidate:'',
 		candidatestatus:'',
@@ -20,7 +21,29 @@ class HRFeedback extends Component {
 
 handleSelectCandidateChange = (e) =>{
    this.setState({selectcandidate: e.target.value});
+    this.getInterviewFeedback()
+      .then(res => this.setState({ interviewFeedbackResponse: res}))
+      .catch(err => console.log(err));
 }
+getInterviewFeedback = async () => {
+	  let getInterviewFeedbackRequest={
+		  candidateId: this.state.selectcandidate
+		  }
+	 const response = await fetch('/getInterviewFeedback', {
+        method: 'POST',
+		headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+        body: JSON.stringify(getInterviewFeedbackRequest)
+      });
+	  
+	  const body = await response.json();
+	
+    if (response.status !== 200) throw Error(body.message);
+
+    return body; 
+  };
 
 handleCandidateStatusChange = (e) =>{
    this.setState({candidatestatus: e.target.value});
@@ -48,7 +71,8 @@ submitFeedback = () => {
 		  interviewerFeedback: this.state.interviewerFeedback,
 		  hrFeedback: this.state.hrFeedback,
 		  candidateId: this.state.selectcandidate,
-		  status: this.state.candidatestatus
+		  status: this.state.candidatestatus,
+		  _id:this.state.autoId
 		  }
 	 const response = await fetch('/saveInterviewFeedback', {
         method: 'POST',
@@ -96,6 +120,11 @@ submitFeedback = () => {
 	
 	 const candidateIdResponse = this.state.jobAndCandidateResponse.map((item, i) => (
       <option value={item.candidateId}>{item.candidateId}</option>
+    ));
+	
+	this.state.interviewFeedbackResponse.map((item, i) => (
+	  this.state.interviewerFeedback = item.interviewerFeedback,
+	  this.state.autoId = item._id
     ));
 	
     return (
