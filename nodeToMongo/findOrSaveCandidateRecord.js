@@ -31,6 +31,37 @@ var jobDetailsSchema = new mongoose.Schema({
 
 },{collection: 'jobDetails'},{versionKey:false});
 
+var interviewScheduleSchema = new mongoose.Schema({
+	jobId:String,
+	date:String,
+	time:String,
+	candidateId:String,
+	interviewerName:String
+
+},{collection: 'Interview_Schedule'},{versionKey:false});
+
+var interviewFeedbackSchema = new mongoose.Schema({
+	jobId:String,	
+	candidateId:String,
+	interviewerFeedback:String,
+	candidateFeedback:String,
+	status:String
+
+},{collection: 'Interview_Feedback'},{versionKey:false});
+
+var candidateDocumentsSchema = new mongoose.Schema({
+	jobId:String,	
+	candidateId:String,
+	documentPath:String,
+	document1:{}	
+
+},{collection: 'Candidate_Documents'},{versionKey:false});
+
+var InterviewSchedule= mongoose.model("InterviewSchedule",interviewScheduleSchema) ;
+var InterviewFeedback = mongoose.model("InterviewFeedback",interviewFeedbackSchema) ;
+var CandidateDocuments = mongoose.model("CandidateDocuments",candidateDocumentsSchema) ;
+
+
 var Candidate = mongoose.model("Candidate",candidateSchema) ;
 
 app.use(bodyParser.json());
@@ -129,5 +160,59 @@ res.end( JSON.stringify(result));
     db.close();
   });});
 });
+
+app.post('/saveInterviewSchedules', function (req, res) {
+var interviewSchedule = new InterviewSchedule(req.body);  
+InterviewSchedule.findOneAndUpdate({jobId:req.body.jobId,candidateId:req.body.candidateId},interviewSchedule ,{upsert:true,new:true},function(err,doc){
+ if (err){ 
+         console.error(err);
+res.send(err);
+      } else {
+        console.log("Inserted/Updated  to InterviewSchedules");
+res.send("Success");
+      }
+});
+
+});
+
+
+app.post('/saveInterviewFeedback', function (req, res) {
+var interviewFeedback = new InterviewFeedback(req.body);  
+InterviewFeedback.findOneAndUpdate({jobId:req.body.jobId,candidateId:req.body.candidateId},interviewFeedback ,{upsert:true,new:true},function(err,doc){
+ if (err){ 
+         console.error(err);
+res.send(err);
+      } else {
+        console.log("Inserted/Updated  to InterviewFeedback");
+res.send("Success");
+      }
+});
+
+});
+
+
+
+var fs = require('fs');
+var Binary = require('mongodb').Binary;
+
+
+app.post('/saveCandidateDocuments', function (req, res) {
+var candidateDocuments = new CandidateDocuments(req.body);
+var insert_data ={};
+var data = fs.readFileSync(req.body.documentPath)
+insert_data.file_data= Binary(data);
+candidateDocuments.document1= insert_data; 
+CandidateDocuments.findOneAndUpdate({jobId:req.body.jobId,candidateId:req.body.candidateId},candidateDocuments ,{upsert:true,new:true},function(err,doc){
+ if (err){ 
+         console.error(err);
+res.send(err);
+      } else {
+        console.log("Inserted/Updated  to CandidateDocuments");
+res.send("Success");
+      }
+});
+
+});
+
 app.listen(8081);
 console.log('Running');
