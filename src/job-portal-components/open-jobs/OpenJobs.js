@@ -51,7 +51,7 @@ class OpenJobs extends Component {
 		<td>{ item.position }</td>
 		<td>{ item.location }</td>
 		<td>{ item.noOfOpenings }</td>
-		<td><input type="button" value="Apply"  to={'/CandidateDetails'} onClick={(e)=>this.applyForJob(item.jobId, e)}/></td>
+		<td><Link className="btn btn-info" to={'/CandidateDetails'} onClick={(e)=>this.applyForJob(item.jobId, e)}>Apply</Link></td>
       </tr>
     ));
 
