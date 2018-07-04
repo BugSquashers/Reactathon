@@ -45,6 +45,7 @@ var interviewFeedbackSchema = new mongoose.Schema({
 	candidateId:String,
 	interviewerFeedback:String,
 	candidateFeedback:String,
+	hrFeedback:String,
 	status:String
 
 },{collection: 'Interview_Feedback'},{versionKey:false});
@@ -203,6 +204,30 @@ dbo.collection("Interview_Feedback").find(query).toArray(function(err, result) {
 res.end( JSON.stringify(result));
     db.close();
   });});
+});
+
+
+app.get('/getJobAndCandidate', function (req, res) {
+   
+
+MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    // db pointing to newdb
+     var dbo=db.db("jobsDB");
+var query = { jobId : req.param("jobId")};
+  dbo.collection("Interview_Feedback").find({}).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+res.end( JSON.stringify(result));
+    db.close();
+  });
+console.log("Switched to "+dbo.databaseName+" database");
+    // create 'users' collection in newdb database
+// insert document to 'users' collection using insertOne
+   
+});
+
+      
 });
 
 
