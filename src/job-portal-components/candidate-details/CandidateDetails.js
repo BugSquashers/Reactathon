@@ -39,7 +39,7 @@ let candidate_details={fullName:"Kanchan Kumar",
     return (
 	<div className="candidateClass">Please Enter your Details
 	
-	<div id="register">
+	<div class="content-body" id="register">
                             <form  action="" autocomplete="on"> 
 
                                 <h1> Register </h1> 

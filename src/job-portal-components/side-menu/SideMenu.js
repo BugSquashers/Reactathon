@@ -10,26 +10,30 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 class SideMenu extends Component {
   render() {
     return (
-	  <Router>
-            <div>
-               <ul>
-			   <li><Link to={'/SearchJobs'}>Search Jobs</Link></li>
+	<div>
+	  <Router>   
+		<div>	
+			<div class= "menu-left">
+               <ul class="nav nav-tabs" >
+			      <li><Link to={'/SearchJobs'}>Search Jobs</Link></li>
                   <li><Link to={'/OpenJobs'}>Open Jobs</Link></li>
                   <li><Link to={'/CandidateDetails'}>Candidate Details</Link></li>
 				  <li><Link to={'/HRFeedback'}>HR Feedback</Link></li>
 				  <li><Link to={'/CandidateFeedback'}>Candidate Feedback</Link></li>
                </ul>
-               <hr />
-               
+                    </div> 
+<div>					
                <Switch>
                   <Route exact path='/OpenJobs' component={OpenJobs} />
                   <Route exact path='/CandidateDetails' component={CandidateDetails} />
 				  <Route exact path='/HRFeedback' component={HRFeedback} />
 				  <Route exact path='/CandidateFeedback' component={CandidateFeedback} />
 				  <Route exact path='/SearchJobs' component={SearchJobs} />
-               </Switch>
-            </div>
+              </Switch>
+			   </div>    
+          </div>
          </Router>
+		 </div>
 		 
     );
   }

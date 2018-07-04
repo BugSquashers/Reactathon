@@ -1,4 +1,11 @@
-ul {
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			width: 200px;
+			background-color: #f1f1f1;
+		}
+		li {
 			list-style-type: none;
 			margin: 0;
 			padding: 0;
@@ -15,7 +22,16 @@ ul {
 
 		/* Change the link color on hover */
 		li a:hover {
-			background-color: #555;
-			color: white;
+			background-color: red;
+			color: GrayText;
+			width:100%;
+			width:100%;
 		}
+		
+		.menu-left {
+			float: left;
+			width:30%;
+			height:100%
+		}
+		
 		

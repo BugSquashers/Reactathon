@@ -42,7 +42,7 @@ class OpenJobs extends Component {
     ));
 
     return (
-      <table border="1">
+      <table border="1" class="content-body" >
 		<thead>
 			<tr>
 				

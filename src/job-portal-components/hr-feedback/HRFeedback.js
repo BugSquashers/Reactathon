@@ -3,7 +3,7 @@ import './HRFeedback.css';
 
 class HRFeedback extends Component {
   render() {
-    return (<form  action="" autocomplete="on"> 
+    return (<form class="content-body" action="" autocomplete="on"> 
 
                                 <h1> Register </h1> 
                                 <p> 
