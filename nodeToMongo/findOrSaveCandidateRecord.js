@@ -8,13 +8,6 @@ var MongoClient = require('mongodb').MongoClient;
 var bodyParser= require('body-parser');
 var express = require('express');
 var app = express();
-
-var express_graphql = require('express-graphql');
-var { buildSchema } = require('graphql');
-const { makeExecutableSchema } = require('graphql-tools')
-const Schema = mongoose.Schema;
-
-
  var candidateSchema = new mongoose.Schema({
 	fullName:String,
 	age:String,
@@ -51,8 +44,8 @@ var interviewFeedbackSchema = new mongoose.Schema({
 	jobId:String,	
 	candidateId:String,
 	interviewerFeedback:String,
+hrFeedback:String,
 	candidateFeedback:String,
-	hrFeedback:String,
 	status:String
 
 },{collection: 'Interview_Feedback'},{versionKey:false});
@@ -91,6 +84,32 @@ Candidate.findOneAndUpdate({$or:[{email:req.body.email},{candidateId:req.body.ca
 });
 
 });
+
+ 
+app.get('/getJobAndCandidate', function (req, res) {
+   
+
+MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    // db pointing to newdb
+     var dbo=db.db("jobsDB");
+var query = { jobId : req.param("jobId")};
+  dbo.collection("Interview_Feedback").find({}).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+res.end( JSON.stringify(result));
+    db.close();
+  });
+console.log("Switched to "+dbo.databaseName+" database");
+    // create 'users' collection in newdb database
+// insert document to 'users' collection using insertOne
+   
+});
+
+      
+});
+
+
 
 app.post('/getCandidateDetails', function (req, res) {
 var cadidate = new Candidate(req.body);  
@@ -214,30 +233,6 @@ res.end( JSON.stringify(result));
 });
 
 
-app.get('/getJobAndCandidate', function (req, res) {
-   
-
-MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
-    // db pointing to newdb
-     var dbo=db.db("jobsDB");
-var query = { jobId : req.param("jobId")};
-  dbo.collection("Interview_Feedback").find({}).toArray(function(err, result) {
-    if (err) throw err;
-    console.log(result);
-res.end( JSON.stringify(result));
-    db.close();
-  });
-console.log("Switched to "+dbo.databaseName+" database");
-    // create 'users' collection in newdb database
-// insert document to 'users' collection using insertOne
-   
-});
-
-      
-});
-
-
 
 var fs = require('fs');
 var Binary = require('mongodb').Binary;
@@ -260,74 +255,6 @@ res.send("Success");
 });
 
 });
-
-
-
-
-var job_detail= mongoose.model("JobDetail",jobDetailsSchema) ;
-var candidate_detail= mongoose.model("Candidate",candidateSchema) ;
-
-
-const typeDefs = 
-`type Candidate {
-  _id: String
-  candidateId: String
-  email:String
- 
-}
-type JobDetail {
-  	jobId: String 
-	coreSkils:String,
-	position:String,
-	location:String,
-	noOfOpenings:String
-}
-
-
-type Query {
-  candidate(candidateId: String): Candidate
-  candidates: [Candidate]
-  job(jobId: String):JobDetail	 
-  jobs:[JobDetail]
-}`
-
-
-const resolvers = {
-  Query: {
-    candidate: async (candidateId) => {
-      return (await candidate_detail.findOne(candidateId))
-    },
-    candidates: async () => {
-      return (await candidate_detail.find({}))
-    },
-    job: async (candidateId) => {
-      return (await job_detail.findOne(jobId))
-    },
-    jobs: async () => {
-      return (await job_detail.find({}))
-    },
-  },
-}
-
-
-const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers
-})
-// Create an express server and a GraphQL endpoint
-var app = express();
-app.use('/graphql', express_graphql({
-  schema,
-  pretty: true,
-  graphiql: true
-}));
-
-mongoose.connect('mongodb://localhost:27017/jobsDB')
-var db = mongoose.connection;
-db.on('error', ()=> {console.log( '---FAILED to connect to mongoose')})
-db.once('open', () => {
- console.log( '+++Connected to mongoose')
-})
 
 app.listen(8081);
 console.log('Running');
