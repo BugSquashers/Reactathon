@@ -15,83 +15,6 @@ class HRFeedback extends Component {
 		autoId:''
   };
   
-   jobIdChange = (e) =>{
-   this.setState({jobid: e.target.value});
-}
-
-handleSelectCandidateChange = (e) =>{
-   this.setState({selectcandidate: e.target.value});
-    this.getInterviewFeedback()
-      .then(res => this.setState({ interviewFeedbackResponse: res}))
-      .catch(err => console.log(err));
-}
-getInterviewFeedback = async () => {
-	  let getInterviewFeedbackRequest={
-		  candidateId: this.state.selectcandidate
-		  }
-	 const response = await fetch('/getInterviewFeedback', {
-        method: 'POST',
-		headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-  },
-        body: JSON.stringify(getInterviewFeedbackRequest)
-      });
-	  
-	  const body = await response.json();
-	
-    if (response.status !== 200) throw Error(body.message);
-
-    return body; 
-  };
-
-handleCandidateStatusChange = (e) =>{
-   this.setState({candidatestatus: e.target.value});
-}
-
-handleInterviewFeedbackChange = (e) =>{
-   this.setState({interviewerFeedback: e.target.value});
-}
-
-handleHrFeedbackChange = (e) =>{
-   this.setState({hrFeedback: e.target.value});
-}
-
-
-submitFeedback = () => {
-   console.log('submitFeedback Called');
-	this.callApi()
-      .then(res => this.setState({ response: res}))
-      .catch(err => console.log(err));
-  }
-  
-  callApi = async () => {
-	  let submitFeedbackRequest={
-		  jobId: this.state.jobid,
-		  interviewerFeedback: this.state.interviewerFeedback,
-		  hrFeedback: this.state.hrFeedback,
-		  candidateId: this.state.selectcandidate,
-		  status: this.state.candidatestatus,
-		  _id:this.state.autoId
-		  }
-	 const response = await fetch('/saveInterviewFeedback', {
-        method: 'POST',
-		headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-  },
-        body: JSON.stringify(submitFeedbackRequest)
-      });
-	  
-	  const body = await response.json();
-	
-    if (response.status !== 200) throw Error(body.message);
-
-    return body;
-	  
-	  
-	  
-  };
   
   componentDidMount() {
     this.callLoadJobAndCandidate()
@@ -100,10 +23,18 @@ submitFeedback = () => {
   }
 
   callLoadJobAndCandidate = async () => {
-    const jobAndCandidateResponse = await fetch('/getJobAndCandidate');
+    const jobAndCandidateResponse = await fetch('/graphql', {
+        method: 'POST',
+		headers: {
+    'Accept': 'application/graphql',
+    'Content-Type': 'application/graphql',
+  },
+        body: 'query{jobs {jobId}candidates{candidateId}}'
+      });
 	
+	console.log(jobAndCandidateResponse+'jobAndCandidateResponse');
     const body = await jobAndCandidateResponse.json();
-	
+	console.log(body);
     if (jobAndCandidateResponse.status !== 200) throw Error(body.message);
 
     return body;
@@ -111,30 +42,17 @@ submitFeedback = () => {
   
   
   render() {
-	  
-	  const jobIdResponse = this.state.jobAndCandidateResponse.map((item, i) => (
-      
-  <option value={item.jobId}>{item.jobId}</option>
-	  
-    ));
+	 
 	
-	 const candidateIdResponse = this.state.jobAndCandidateResponse.map((item, i) => (
-      <option value={item.candidateId}>{item.candidateId}</option>
-    ));
-	
-	this.state.interviewFeedbackResponse.map((item, i) => (
-	  this.state.interviewerFeedback = item.interviewerFeedback,
-	  this.state.autoId = item._id
-    ));
 	
     return (
-	<form className="content-body" action="" autocomplete="on"> 
+	<form className="content-body" action=""> 
 		<h3> Feedback </h3>
 		<p> 
 			<label htmlFor="jobid" className="jobid">Select Job*</label>
 			<select className="form-control" name="jobid" value={this.state.jobid} onChange={this.jobIdChange}>
 			<option value="volvo">Select</option>
-				{ jobIdResponse }
+			
 			</select>
 		</p>
 
@@ -142,7 +60,8 @@ submitFeedback = () => {
 		<label htmlFor="selectcandidate" className="selectcandidate">Select Candidate*</label>
 			<select className="form-control" name="selectcandidate" value={this.state.selectcandidate} onChange={this.handleSelectCandidateChange}>
 			<option value="volvo">Select</option>
-				{candidateIdResponse}
+
+				
 			</select>
 		</p>
 

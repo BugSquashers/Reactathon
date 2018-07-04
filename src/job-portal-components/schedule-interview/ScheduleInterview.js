@@ -3,7 +3,7 @@ import './ScheduleInterview.css';
 
 class ScheduleInterview extends Component {
   render() {
-    return (<form className="content-body" action="" autocomplete="on"> 
+    return (<form className="content-body" action=""> 
 
                                 <h3> Schedule A Interview </h3> 
 								<p> 
