@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './SearchJobs.css';
+import CandidateDetails from '../candidate-details/CandidateDetails';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 class SearchJobs extends Component {
 	
@@ -52,7 +54,16 @@ class SearchJobs extends Component {
 }
 applyForJob = (jobId) => {
     console.log('value of id id -->', jobId);
-	
+	<Router>   
+		<div>						
+               <Switch>
+                  
+                  <Route exact path='/CandidateDetails' component={CandidateDetails} />
+				
+              </Switch>
+			      
+          </div>
+         </Router>
   }
 
   render() {
@@ -63,7 +74,7 @@ applyForJob = (jobId) => {
 		<td>{ item.position }</td>
 		<td>{ item.location }</td>
 		<td>{ item.noOfOpenings }</td>
-		<td><input type="button" value="Apply" onClick={(e)=>this.applyForJob(item.jobId, e)}/></td>
+		<td><Link className="btn btn-info" to={'/CandidateDetails'} onClick={(e)=>this.applyForJob(item.jobId, e)}>Apply</Link></td>
       </tr>
     ));
 	
