@@ -23,26 +23,55 @@ const Schema = mongoose.Schema;
 var candidate_detail= mongoose.model("Candidate",candidateSchema) ;
 
 
+var jobDetailsSchema = new mongoose.Schema({
+	jobId:String,
+	coreSkils:String,
+	position:String,
+	location:String,
+	noOfOpenings:String
+
+},{collection: 'jobDetails'},{versionKey:false});
+
+var job_detail= mongoose.model("JobDetail",jobDetailsSchema) ;
+
+
 const typeDefs = 
 `type Candidate {
   _id: String
-  naee: String
-  email: String
+  candidateId: String
+  email:String
  
 }
+type JobDetail {
+  	jobId: String 
+	coreSkils:String,
+	position:String,
+	location:String,
+	noOfOpenings:String
+}
+
+
 type Query {
-  candidate(email: String): Candidate
+  candidate(candidateId: String): Candidate
   candidates: [Candidate]
+  job(jobId: String):JobDetail	 
+  jobs:[JobDetail]
 }`
 
 
 const resolvers = {
   Query: {
-    candidate: async (email) => {
-      return (await candidate_detail.findOne(email))
+    candidate: async (candidateId) => {
+      return (await candidate_detail.findOne(candidateId))
     },
     candidates: async () => {
       return (await candidate_detail.find({}))
+    },
+    job: async (candidateId) => {
+      return (await job_detail.findOne(jobId))
+    },
+    jobs: async () => {
+      return (await job_detail.find({}))
     },
   },
 }
