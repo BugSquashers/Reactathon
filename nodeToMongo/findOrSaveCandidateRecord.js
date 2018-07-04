@@ -8,6 +8,13 @@ var MongoClient = require('mongodb').MongoClient;
 var bodyParser= require('body-parser');
 var express = require('express');
 var app = express();
+
+var express_graphql = require('express-graphql');
+var { buildSchema } = require('graphql');
+const { makeExecutableSchema } = require('graphql-tools')
+const Schema = mongoose.Schema;
+
+
  var candidateSchema = new mongoose.Schema({
 	fullName:String,
 	age:String,
@@ -253,6 +260,74 @@ res.send("Success");
 });
 
 });
+
+
+
+
+var job_detail= mongoose.model("JobDetail",jobDetailsSchema) ;
+var candidate_detail= mongoose.model("Candidate",candidateSchema) ;
+
+
+const typeDefs = 
+`type Candidate {
+  _id: String
+  candidateId: String
+  email:String
+ 
+}
+type JobDetail {
+  	jobId: String 
+	coreSkils:String,
+	position:String,
+	location:String,
+	noOfOpenings:String
+}
+
+
+type Query {
+  candidate(candidateId: String): Candidate
+  candidates: [Candidate]
+  job(jobId: String):JobDetail	 
+  jobs:[JobDetail]
+}`
+
+
+const resolvers = {
+  Query: {
+    candidate: async (candidateId) => {
+      return (await candidate_detail.findOne(candidateId))
+    },
+    candidates: async () => {
+      return (await candidate_detail.find({}))
+    },
+    job: async (candidateId) => {
+      return (await job_detail.findOne(jobId))
+    },
+    jobs: async () => {
+      return (await job_detail.find({}))
+    },
+  },
+}
+
+
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers
+})
+// Create an express server and a GraphQL endpoint
+var app = express();
+app.use('/graphql', express_graphql({
+  schema,
+  pretty: true,
+  graphiql: true
+}));
+
+mongoose.connect('mongodb://localhost:27017/jobsDB')
+var db = mongoose.connection;
+db.on('error', ()=> {console.log( '---FAILED to connect to mongoose')})
+db.once('open', () => {
+ console.log( '+++Connected to mongoose')
+})
 
 app.listen(8081);
 console.log('Running');
