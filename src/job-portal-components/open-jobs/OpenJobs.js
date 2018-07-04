@@ -42,20 +42,24 @@ class OpenJobs extends Component {
     ));
 
     return (
-      <table border="1" class="content-body" >
-		<thead>
+	<div class="content-body" >
+	 <h3 class ="">Openings:</h3>
+      <table class="table" >
+	 
+		<thead class="thead-dark">
 			<tr>
 				
 				<th>Job Id</th>
 				<th> Core Skills</th>
 				<th> Position</th>
 				<th> Location</th>
-				<th>No of Openings</th>
+				<th> Openings</th>
 				<th>Apply</th>
 			</tr>
 		</thead>
 		<tbody>{ response }</tbody>
 	  </table>
+	  </div>
     );
 	
   }
